@@ -1,4 +1,4 @@
 @extends('app')
 @section('content')
-    <h1>{{$user}}</h1>
+    <h1>{{$user['message']}}</h1>
 @endsection
