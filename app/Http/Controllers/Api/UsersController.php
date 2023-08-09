@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersFormRequest;
 use App\Interfaces\UsersInterface;
 use Exception;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -48,4 +50,26 @@ class UsersController extends Controller
             return response()->json($e->getMessage(),500);
         }
     }
+
+    public function showAll(){
+        try{
+            $allUsers = $this->userRepository->showAll();
+            return response()->json($allUsers,200);
+        }catch (Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
+    }
+
+    public function show(Request $request){
+        try{
+            $validated = $request->validate([
+                'id' => 'required|numeric',
+            ]);
+            $user = $this->userRepository->showPerId($request->input('id'));
+            return response()->json($user,200);
+        }catch (Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
+    }
 }
+

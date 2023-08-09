@@ -36,9 +36,9 @@ class UsersRepository implements UsersInterface
         return User::with('roles','personal_user_data')->find($id);
     }
 
-    public function showAll():User
+    public function showAll(): array
     {
-        return User::with('roles','personal_user_data')->all();
+        return User::with('roles','personal_user_data')->get()->toArray();
     }
 
     public function update(Array $userUpdate):User{
@@ -78,6 +78,7 @@ class UsersRepository implements UsersInterface
         return [
             "token" => $user->createToken("API TOKEN",$permisions)->plainTextToken,
             "name" => $user->name,
+            "permisions" => $permisions
         ];
     }
 

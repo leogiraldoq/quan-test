@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthFormRequest;
 use App\Interfaces\UsersInterface;
 use Exception;
@@ -27,6 +28,7 @@ class AuthController extends Controller
             return response()->json([
                 "message" => "Bienvenido {$dataAccess['name']}",
                 "token" => $dataAccess['token'],
+                "permisions" => $dataAccess['permisions'],
             ]);
         }catch (Exception $e){
             return response()->json($e->getMessage(),500);

@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Web\ViewFrontController;
+use App\Http\Controllers\Web\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-
-Route::post('auth.user',[LoginController::class,'loginApi'])->name('auth.user');
+Route::get('/', [ViewFrontController::class,'login'])->name('login');
+Route::get('/logout',[UsersController::class,'logout'])->name('logout');
+Route::get('/usercreate',[ViewFrontController::class,'usercreate'])->name('usercreate');
+Route::get('/userupdate/{id}',[ViewFrontController::class,'userupdate'])->name('userupdate');
+//Api Consumes
+Route::post('authuser',[UsersController::class,'authUser'])->name('authuser');
+Route::post('userApiCreate',[UsersController::class,'createUser'])->name('userApiCreate');
