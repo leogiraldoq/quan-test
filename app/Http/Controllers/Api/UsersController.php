@@ -45,7 +45,7 @@ class UsersController extends Controller
         try{
             $userValidData = $request->validated();
             $userNameDelete = $this->userRepository->delete($userValidData['id']);
-            return response()->json("El usuario {$userNameDelete} ha sido eliminado correctamente",200);
+            return response()->json(["message" => "El usuario {$userNameDelete} ha sido eliminado correctamente"],200);
         }catch (Exception $e){
             return response()->json($e->getMessage(),500);
         }
